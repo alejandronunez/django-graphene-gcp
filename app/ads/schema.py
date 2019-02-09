@@ -25,7 +25,7 @@ class AdType(DjangoObjectType):
     def resolve_email(self, info, **kwargs):
         """Resolve email field"""
 
-        return "This the email:%d" % self.email
+        return "This the email:%s" % self.email
 
 
 ALL_ADS = DjangoFilterConnectionField(AdType, filterset_class=AdFilter, description='List all ads')
@@ -89,8 +89,8 @@ class DeleteAdMutation(DjangoModelFormMutation):
         :param info: Schema info
         :return: id of instance
         """
-        ad_instance = form.remove()
-        return ad_instance.id
+        form.save()
+        return cls(ad=form.instance)
 
 
 class CreateAdMutation(DjangoModelFormMutation):
@@ -121,6 +121,7 @@ class AdMutation(object):
     Root Class of the ads app mutations
     """
     create_ad = CreateAdMutation.Field(description='New ad')
+    remove_ad = DeleteAdMutation.Field(description='Remove ad')
 
 
 class AdQuery(object):
