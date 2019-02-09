@@ -1,0 +1,38 @@
+FROM google/cloud-sdk
+
+RUN apt-get update
+
+RUN apt-get install -y --no-install-recommends \
+        build-essential \
+        python-dev \
+        default-libmysqlclient-dev \
+        fabric \
+        python-pip \
+        git \
+        wget \
+        google-cloud-sdk-app-engine-python-extras
+
+RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 && \
+        mv cloud_sql_proxy.linux.amd64 ~/cloud_sql_proxy && \
+        chmod +x ~/cloud_sql_proxy
+
+RUN pip install --upgrade pip
+
+EXPOSE 3306
+
+#to improve gutil rsync
+RUN pip install -U crcmod
+
+
+#installing python requirement
+ADD ./app/requirements-vendor.txt /opt/project/app/requirements-vendor.txt
+RUN pip install -r /opt/project/app/requirements-vendor.txt -t /opt/project/app/vendor
+
+ADD ./requirements-dev.txt /opt/project/requirements-dev.txt
+RUN pip install -r /opt/project/requirements-dev.txt
+
+WORKDIR /opt/project/app
+
+EXPOSE 8080
+EXPOSE 8000
+

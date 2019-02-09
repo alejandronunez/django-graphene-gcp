@@ -1,0 +1,37 @@
+version: '2'
+services:
+  api:
+    image: django-graphene/api
+    container_name: django-graphene-gcp-api
+    build:
+      context: ./
+      dockerfile: ./dev/dockerfiles/gcloud
+    command: ["tail", "-f", "/dev/null"]
+    environment:
+     - DB_NAME=djangographene
+     - DB_USER=root
+     - DB_PASSWORD=123123
+     - DB_HOST=db
+     - DB_PORT=3306
+     - GAE_SDK_PATH=/usr/lib/google-cloud-sdk/
+    ports:
+      - '8008:8000'
+      - '8088:8080'
+    links:
+      - db
+    volumes:
+      - .:/opt/project
+      - ./dev/data/gcp:/root/.config/gcloud
+
+  db:
+    image: mysql
+    container_name: django-graphene-gcp-mysql
+    environment:
+     - MYSQL_ROOT_PASSWORD=123123
+     - MYSQL_DATABASE=djangographene
+     - MYSQL_USER=superuser
+     - MYSQL_PASSWORD=123123
+    volumes:
+      - ./dev/data/mysql:/var/lib/mysql
+    ports:
+      - '3308:3306'
