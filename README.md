@@ -9,7 +9,7 @@ To test functionality implemented in `https://github.com/graphql-python/graphene
 ### Step to start:
 - `docker-compose up` to start the containers
 - `docker exec -it django-graphene-gcp-api python manage.py loaddata categories ads` to load fixture data
-- go to `http://localhost:8008` to access to Graphiql.
+- go to `http://localhost:8008/dev/` to access to Graphiql.
 - your first query:
 ```
 {
@@ -36,3 +36,6 @@ To test functionality implemented in `https://github.com/graphql-python/graphene
   }
 }
 ```
+
+### Explore
+This [file](https://github.com/alejandronunez/django-graphene-gcp/blob/graphene-elasticsearch/app/ads/filters.py) has the work with the filters
