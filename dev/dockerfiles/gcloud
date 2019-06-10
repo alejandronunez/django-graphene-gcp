@@ -1,0 +1,27 @@
+FROM python
+
+RUN apt-get update
+RUN apt-get install -y python3-pip default-libmysqlclient-dev wget
+
+# installing DOCKERIZe
+ENV DOCKERIZE_VERSION v0.6.1
+RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+
+# installing python requirement
+ADD ./app/requirements-vendor.txt /opt/project/app/requirements-vendor.txt
+RUN pip3 install -r /opt/project/app/requirements-vendor.txt
+
+# set working directory
+WORKDIR /opt/project/app
+
+# Entrypoint
+COPY dev/dockerfiles/docker-entrypoint.sh /usr/local/bin/
+ENTRYPOINT ["docker-entrypoint.sh"]
+
+# Default command
+CMD ["python", "./manage.py", "runserver", "0.0.0.0:8000"]
+
+EXPOSE 8000
+

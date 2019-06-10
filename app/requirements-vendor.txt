@@ -1,0 +1,12 @@
+urllib3==1.23
+mysqlclient
+Django>=1.11.0,<2.0.0
+django-filter==1.0.2
+git+https://github.com/revolico/graphene-django@elasticsearch-filterset
+django-cors-headers==2.0.0
+confusable_homoglyphs>=3.0.0
+setuptools==5.5.1
+django-jwt-auth
+django-mysql>=2.2.2
+django-elasticsearch-dsl
+elasticsearch-dsl==6.0

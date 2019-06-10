@@ -1,0 +1,37 @@
+[
+  {
+    "model": "ads.category",
+    "pk": 1,
+    "fields": {
+      "name": "Ventas"
+    }
+  },
+  {
+    "model": "ads.category",
+    "pk": 2,
+    "fields": {
+      "parent_category":1, "name": "Carros"
+    }
+  },
+  {
+    "model": "ads.category",
+    "pk": 3,
+    "fields": {
+      "parent_category":1, "name": "Casas"
+    }
+  },
+  {
+    "model": "ads.category",
+    "pk": 4,
+    "fields": {
+      "name": "Servicios"
+    }
+  },
+  {
+    "model": "ads.category",
+    "pk": 5,
+    "fields": {
+      "parent_category":4, "name": "Empleos"
+    }
+  }
+]
