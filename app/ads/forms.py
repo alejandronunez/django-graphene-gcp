@@ -28,5 +28,4 @@ class DeleteAdForm(forms.ModelForm):
 
     def save(self, commit=True):
         """Remove ad"""
-        self.instance.status = Ad.StatusChoices.removed
         super(DeleteAdForm, self).save(commit)

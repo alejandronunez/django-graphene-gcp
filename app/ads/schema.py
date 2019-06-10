@@ -4,12 +4,13 @@ Graphql Schema definition for ads App
 """
 from __future__ import unicode_literals
 from graphene import Field, List, Int
+from graphene_django.elasticsearch.filter.fields import DjangoESFilterConnectionField
 from graphene_django.filter import DjangoFilterConnectionField
 from graphene_django.forms.mutation import DjangoModelFormMutation
 from graphene_django.types import DjangoObjectType
 from ads.models import Ad, Category
 from ads.forms import DeleteAdForm, CreateAdForm
-from ads.filters import AdFilter
+from ads.filters import AdFilter, AdFilterES, AdFilterESAuto
 
 
 class AdType(DjangoObjectType):
@@ -42,7 +43,7 @@ class CategoryType(DjangoObjectType):
         """Meta class"""
         model = Category
         use_connection = True
-        only_fields = ('name', 'parent_category')
+        only_fields = ('id', 'name', 'parent_category')
 
     def resolve_subcategories(self, info):
         """
@@ -129,6 +130,16 @@ class AdQuery(object):
     Root class of the ads app queries
     """
     ads = ALL_ADS
+    es_ads = DjangoESFilterConnectionField(
+        AdType,
+        filterset_class=AdFilterES,
+        description='Ads list with filters'
+    )
+    es_auto_ads = DjangoESFilterConnectionField(
+        AdType,
+        filterset_class=AdFilterESAuto,
+        description='Ads list with filters'
+    )
     ad = Field(AdType, id=Int(required=True), description='Ad detail')
 
     @classmethod

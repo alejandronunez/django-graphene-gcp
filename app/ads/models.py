@@ -2,8 +2,6 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from django_mysql.models import EnumField
-from djchoices import DjangoChoices, ChoiceItem
 
 
 class Category(models.Model):
@@ -22,13 +20,6 @@ class Ad(models.Model):
     Model to handle ads
     """
 
-    class StatusChoices(DjangoChoices):
-        """
-        State for ads
-        """
-        published = ChoiceItem('PUBLISHED', 'Ad expired')
-        removed = ChoiceItem('REMOVED', 'Ad removed')
-
     title = models.CharField(max_length=123, help_text='Title')
     description = models.CharField(max_length=500, blank=True, null=True, help_text='Description')
     price = models.IntegerField(null=True, blank=True, help_text='Price')
@@ -37,5 +28,4 @@ class Ad(models.Model):
     phone = models.CharField(max_length=12, blank=True, null=True, help_text='Phone')
     created_on = models.DateTimeField(auto_now_add=True, help_text='Create')
     updated_on = models.DateTimeField(auto_now=True, help_text='Update')
-    status = EnumField(choices=StatusChoices.choices, default=StatusChoices.published, help_text='Ad status')
     subcategory = models.ForeignKey(Category, help_text='Category')

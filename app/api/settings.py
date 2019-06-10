@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'graphene_django',
     'corsheaders',
     'ads',
+    'django_elasticsearch_dsl',
 ]
 
 MIDDLEWARE = [
@@ -55,40 +56,26 @@ CORS_ALLOW_CREDENTIALS = True
 ROOT_URLCONF = 'api.urls'
 
 WSGI_APPLICATION = 'api.wsgi.application'
-GAE_SDK = True if os.getenv('SERVER_SOFTWARE', '').startswith('Development') else False
 
-# If it is there in GAE
-if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):  # pragma: no cover
-    # KEY_DICT = get_and_decrypt_keys()
-    # # Database
-    # # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-    # DATABASES = {
-    #     'default': {
-    #         'ENGINE': 'django.db.backends.mysql',
-    #         'NAME': KEY_DICT['DB_NAME'],
-    #         'USER': KEY_DICT['DB_USER'],
-    #         'PASSWORD': KEY_DICT['DB_PASSWORD'],
-    #         'HOST': KEY_DICT['DB_HOST'],
-    #         'PORT': KEY_DICT['DB_PORT'],
-    #     }
-    # }
-    pass
 
-else:
+# ElasticSearch
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': os.environ.get('ELASTICSEARCH_CONNECTION_STRING', ''),
+    },
+}
 
-    GAE_SDK_PATH = "%s/platform/google_appengine" % os.getenv('GAE_SDK_PATH', '')
-
-    # Database
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': os.environ.get('DB_NAME', 'djangographene'),
-            'USER': os.environ.get('DB_USER', 'superuser'),
-            'PASSWORD': os.environ.get('DB_PASSWORD', '123123'),
-            'HOST': os.environ.get('DB_HOST', 'localhost'),
-            'PORT': os.environ.get('DB_PORT', '3306'),
-        }
+# Database
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('DB_NAME', 'djangographene'),
+        'USER': os.environ.get('DB_USER', 'superuser'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', '123123'),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', '3306'),
     }
+}
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'

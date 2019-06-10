@@ -14,7 +14,6 @@
 *.swp
 *.out
 *.coverage
-/dev/data/*
 /app/vendor/*
 /dev/cover/*
 **/email/*.html

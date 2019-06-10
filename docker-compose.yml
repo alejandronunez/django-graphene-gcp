@@ -1,4 +1,4 @@
-version: '2'
+version: '2.1'
 services:
   api:
     image: django-graphene/api
@@ -6,22 +6,21 @@ services:
     build:
       context: ./
       dockerfile: ./dev/dockerfiles/gcloud
-    command: ["tail", "-f", "/dev/null"]
     environment:
      - DB_NAME=djangographene
      - DB_USER=root
      - DB_PASSWORD=123123
      - DB_HOST=db
      - DB_PORT=3306
-     - GAE_SDK_PATH=/usr/lib/google-cloud-sdk/
+     - ELASTICSEARCH_CONNECTION_STRING=http://elastic:changeme@elasticsearch:9200/
+    restart: on-failure
     ports:
       - '8008:8000'
-      - '8088:8080'
     links:
       - db
+      - elasticsearch
     volumes:
       - .:/opt/project
-      - ./dev/data/gcp:/root/.config/gcloud
 
   db:
     image: mysql
@@ -35,3 +34,15 @@ services:
       - ./dev/data/mysql:/var/lib/mysql
     ports:
       - '3308:3306'
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+    container_name: django-graphene-gcp-elasticsearch
+    environment:
+      - cluster.name=docker-cluster
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - ./dev/data/elasticsearch:/usr/share/elasticsearch/data
+    ports:
+      - '9201:9200'

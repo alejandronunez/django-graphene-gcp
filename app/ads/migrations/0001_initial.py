@@ -27,7 +27,6 @@ class Migration(migrations.Migration):
                 ('phone', models.CharField(blank=True, help_text='Phone', max_length=12, null=True)),
                 ('created_on', models.DateTimeField(auto_now_add=True, help_text='Create')),
                 ('updated_on', models.DateTimeField(auto_now=True, help_text='Update')),
-                ('status', django_mysql.models.EnumField(choices=[('PUBLISHED', 'Ad expired'), ('REMOVED', 'Ad removed')], default='PUBLISHED', help_text='Ad status')),
             ],
         ),
         migrations.CreateModel(

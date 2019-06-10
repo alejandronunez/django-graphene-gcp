@@ -1,0 +1,77 @@
+[
+  {
+    "model": "ads.ad",
+    "pk": 1,
+    "fields": {
+      "title": "EXCELLENT 2BR UNIT AVAILABLE HEATHROW ~ MOVE IN TODAY! (Heathrow FL)",
+      "description": "Our community features 1, 2 and 3 bedroom apartment homes that include fully equipped kitchens, in home full size washer and dryer, private patio or balcony, 24 hour emergency maintenance and a 30-day move-in guarante",
+      "price": null,
+      "name": null,
+      "email": null,
+      "phone": null,
+      "created_on": "2019-06-10T18:05:04.431",
+      "updated_on": "2019-06-10T18:05:04.431",
+      "subcategory": 3
+    }
+  },
+  {
+    "model": "ads.ad",
+    "pk": 2,
+    "fields": {
+      "title": "Resident Business Center, Resort-style Swimming Pool, Six-panel Doors (Orlando)",
+      "description": "The Place on Millenia Boulevard Apartment Homes offers the best luxury living experience in the Millenia area of Southwest Orlando with a variety of one, two, and three bedroom layouts.",
+      "price": null,
+      "name": null,
+      "email": null,
+      "phone": null,
+      "created_on": "2019-06-10T18:06:08.275",
+      "updated_on": "2019-06-10T18:06:08.275",
+      "subcategory": 3
+    }
+  },
+  {
+    "model": "ads.ad",
+    "pk": 3,
+    "fields": {
+      "title": "Maintenance Request Services, Ample Walking Areas, Hangout Areas (Casselberry)",
+      "description": "Sole at Casselberry provides the best in luxury living at our Casselberry apartments. With a unique and varied selection of one, two, and three bedroom apartments for rent in Casselberry, there is a floor plan that will suit your lifestyle",
+      "price": 1253,
+      "name": null,
+      "email": null,
+      "phone": null,
+      "created_on": "2019-06-10T18:07:07.273",
+      "updated_on": "2019-06-10T18:07:07.273",
+      "subcategory": 3
+    }
+  },
+  {
+    "model": "ads.ad",
+    "pk": 4,
+    "fields": {
+      "title": "Access to Fun, Outdoor! Two Bedroom on SPECIAL! Luxury Home! (3 Minute Walk to Lynx Bus Stop",
+      "description": "Imagine coming home from work, school, or a day with friends and being able to take a refreshing dip in our large sparkling pool followed by a little unwinding in our spacious hot tub spa. Sound like a dream? It's your reality at Palio Apartment Homes!",
+      "price": 1639,
+      "name": null,
+      "email": null,
+      "phone": null,
+      "created_on": "2019-06-10T18:07:54.468",
+      "updated_on": "2019-06-10T18:07:54.468",
+      "subcategory": 3
+    }
+  },
+  {
+    "model": "ads.ad",
+    "pk": 5,
+    "fields": {
+      "title": "Granite bar tops, Fully equipped kitchens, Ceramic tile (Downtown Kissimmee, Valencia College, Silver Spurs Arena)",
+      "description": "Redefine what stylish living in Kissimmee, FL means at Verano Apartments. An elegant escape in a resort-inspired setting, our sophisticated community welcomes you with modern one, two, and three-bedroom apartments, fabulous amenities, and a pet-friendly ambiance",
+      "price": 1242,
+      "name": null,
+      "email": null,
+      "phone": null,
+      "created_on": "2019-06-10T18:08:33.211",
+      "updated_on": "2019-06-10T18:08:33.211",
+      "subcategory": 3
+    }
+  }
+]

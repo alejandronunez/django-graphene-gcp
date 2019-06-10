@@ -1,38 +1,27 @@
-FROM google/cloud-sdk
+FROM python
 
 RUN apt-get update
+RUN apt-get install -y python3-pip default-libmysqlclient-dev wget
 
-RUN apt-get install -y --no-install-recommends \
-        build-essential \
-        python-dev \
-        default-libmysqlclient-dev \
-        fabric \
-        python-pip \
-        git \
-        wget \
-        google-cloud-sdk-app-engine-python-extras
+# installing DOCKERIZe
+ENV DOCKERIZE_VERSION v0.6.1
+RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
-RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 && \
-        mv cloud_sql_proxy.linux.amd64 ~/cloud_sql_proxy && \
-        chmod +x ~/cloud_sql_proxy
-
-RUN pip install --upgrade pip
-
-EXPOSE 3306
-
-#to improve gutil rsync
-RUN pip install -U crcmod
-
-
-#installing python requirement
+# installing python requirement
 ADD ./app/requirements-vendor.txt /opt/project/app/requirements-vendor.txt
-RUN pip install -r /opt/project/app/requirements-vendor.txt -t /opt/project/app/vendor
+RUN pip3 install -r /opt/project/app/requirements-vendor.txt
 
-ADD ./requirements-dev.txt /opt/project/requirements-dev.txt
-RUN pip install -r /opt/project/requirements-dev.txt
-
+# set working directory
 WORKDIR /opt/project/app
 
-EXPOSE 8080
+# Entrypoint
+COPY dev/dockerfiles/docker-entrypoint.sh /usr/local/bin/
+ENTRYPOINT ["docker-entrypoint.sh"]
+
+# Default command
+CMD ["python", "./manage.py", "runserver", "0.0.0.0:8000"]
+
 EXPOSE 8000
 
