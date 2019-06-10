@@ -1,4 +1,3 @@
-urllib3==1.23
 mysqlclient
 Django>=1.11.0,<2.0.0
 django-filter==1.0.2
