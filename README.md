@@ -1,8 +1,8 @@
 # django-graphene-gcp
 
-To test functionality implemented in `https://github.com/graphql-python/graphene-django/pull/666` 
+This repo can be used to test the functionality implemented in `https://github.com/graphql-python/graphene-django/pull/666` A Elasticsearch filterset for the graphene-django library
 
-### dependency:
+### Dependencies
 - `docker`
 - `docker-compose`
 
@@ -38,4 +38,4 @@ To test functionality implemented in `https://github.com/graphql-python/graphene
 ```
 
 ### Explore
-This [file](https://github.com/alejandronunez/django-graphene-gcp/blob/graphene-elasticsearch/app/ads/filters.py) has the work with the filters
+Please use this [file](https://github.com/alejandronunez/django-graphene-gcp/blob/graphene-elasticsearch/app/ads/filters.py) to work with the filters.
